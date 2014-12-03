@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Description;
@@ -79,13 +79,13 @@ namespace Swashbuckle.Swagger
 
             if (apiParamDesc.ParameterDescriptor == null)
             {
-                return new Parameter { ParamType = paramType, Name = apiParamDesc.Name, Required = true, Type = "string" };
+                return new Parameter { ParamType = paramType, Name = paramType == "body" ? "body" : apiParamDesc.Name, Required = true, Type = "string" };
             }
 
             var parameter = new Parameter
             {
                 ParamType = paramType,
-                Name = apiParamDesc.Name,
+                Name = paramType=="body"? "body" : apiParamDesc.Name,
                 Description = apiParamDesc.Documentation,
                 Required = !apiParamDesc.ParameterDescriptor.IsOptional
             };
