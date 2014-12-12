@@ -130,7 +130,7 @@ namespace Swashbuckle.Swagger
                 .ToArray();
 
             var properties = propInfos
-                .ToDictionary(propInfo => Char.ToLowerInvariant(propInfo.Name[0]) + propInfo.Name.Substring(1), propInfo => GetOrRegister(propInfo.PropertyType, true, deferredTypes));
+                .ToDictionary(propInfo => propInfo.Name, propInfo => GetOrRegister(propInfo.PropertyType, true, deferredTypes));
 
             var required = propInfos.Where(propInfo => Attribute.IsDefined(propInfo, typeof (RequiredAttribute)))
                 .Select(propInfo => propInfo.Name)
